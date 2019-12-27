@@ -6,21 +6,23 @@
 </head>
 <body>
 <h1>Discount Calculation</h1>
-<form>
+<form method="post">
+    {% csrf_token %}
     <table>
         <tr>
             <td>Amount </td>
-            <td><input type="number" name="amount" /></td>
+            <td><input type="number" name="amount" value="{{amount}}" /></td>
         </tr>
         <tr>
             <td>Discount Rate </td>
-            <td><input type="number" name="rate" /></td>
+            <td><input type="number" name="rate" value="{{rate}}" /></td>
         </tr>
     </table>
     <p></p>
     <input type="submit" value="Calculate Discount" />
     <p></p>
     <h3>{{discount}}</h3>
+
 </form>
 </body>
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
+import sqlite3
 
 
 def welcome(request):
@@ -41,11 +42,22 @@ def wish(request):
     return render(request, 'wish.html',
                   {'msg': msg, 'user': name})
 
+
 def calculate_discount(request):
-    if 'amount' in request.GET:   # request with data, so process it
-        amount = float(request.GET['amount'])
-        rate = float(request.GET['rate'])
+    if 'amount' in request.POST:  # request with data, so process it
+        amount = float(request.POST['amount'])
+        rate = float(request.POST['rate'])
         discount = amount * rate / 100
-        return render(request, 'discount.html', {'discount' : discount})
+        return render(request, 'discount.html',
+                      {'discount': discount, 'amount': amount, 'rate': rate})
     else:  # request without parameters(data)
-        return render(request,'discount.html')
+        return render(request, 'discount.html')
+
+
+def list_authors(request):
+    con = sqlite3.connect(r"e:\classroom\python\nov19\catalog.db")
+    cur = con.cursor()
+    cur.execute("select * from authors")
+    authors = cur.fetchall()
+    con.close()
+    return render(request, 'list_authors.html', {'authors': authors})

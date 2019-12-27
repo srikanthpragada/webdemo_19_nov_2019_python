@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<body>
+<h1>Authors</h1>
+<table width="100%" cellpadding="5pt">
+    <tr style="background-color:navy;color:white">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+    </tr>
+    {% for author in authors %}
+    <tr>
+        <td>{{author.0}}</td>
+        <td>{{author.1}}</td>
+        <td>{{author.2}}</td>
+        <td>{{author.3}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
