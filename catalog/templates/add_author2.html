@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Author</title>
+</head>
+<body>
+<h1>Add Author</h1>
+<form method="post">
+    {% csrf_token %}
+    Author Name<br/>
+    {{form.name}}
+    <p></p>
+    Author Email Address<br/>
+    {{form.email}}
+    <p></p>
+    Author Mobile<br/>
+    {{form.mobile}}
+    <span style="color:red">{{form.mobile.errors.0}}</span>
+    <p></p>
+    <input type="submit" value="Submit" />
+    <p></p>
+    <div style="color:red">{{message}}</div>
+</form>
+</body>
+</html>

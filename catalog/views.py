@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime
 import sqlite3
+from .forms import AuthorForm
 
 
 def welcome(request):
@@ -61,3 +62,34 @@ def list_authors(request):
     authors = cur.fetchall()
     con.close()
     return render(request, 'list_authors.html', {'authors': authors})
+
+
+def add_author(request):
+    if request.method == "GET":
+        authorform = AuthorForm()
+        return render(request, 'add_author2.html',
+                      {'form': authorform})
+    else:  # POST
+        f = AuthorForm(request.POST)
+        if f.is_valid():
+            name = f.cleaned_data['name']
+            email = f.cleaned_data['email']
+            mobile = f.cleaned_data['mobile']
+
+            con = sqlite3.connect(r"e:\classroom\python\nov19\catalog.db")
+            cur = con.cursor()
+            try:
+                cur.execute("insert into authors(fullname,email,mobile) values(?,?,?)",
+                        (name, email, mobile))
+                con.commit()
+            except Exception as ex:
+                msg = "Sorry! Error : " + str(ex)
+                return render(request, 'add_author2.html',
+                              {'form': f, 'message' : msg})
+            finally:
+                con.close()
+
+            return redirect("/catalog/authors")
+        else:
+            return render(request, 'add_author2.html', {'form': f})
+
