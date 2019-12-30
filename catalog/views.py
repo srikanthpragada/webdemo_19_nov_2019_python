@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime
 import sqlite3
-from .forms import AuthorForm
+from .forms import AuthorForm, UpdateAuthorForm
 
 
 def welcome(request):
@@ -92,4 +92,37 @@ def add_author(request):
             return redirect("/catalog/authors")
         else:
             return render(request, 'add_author2.html', {'form': f})
+
+
+
+def update_author(request):
+    if request.method == "GET":
+        form = UpdateAuthorForm()
+        return render(request, 'update_author.html',
+                      {'form': form})
+    else:  # POST
+        f = UpdateAuthorForm(request.POST)
+        if f.is_valid():
+            id = f.cleaned_data['id']
+            email = f.cleaned_data['email']
+
+            con = sqlite3.connect(r"e:\classroom\python\nov19\catalog.db")
+            cur = con.cursor()
+            try:
+                cur.execute("update authors set email = ? where id = ?",
+                        (email,id))
+                if cur.rowcount == 1:
+                   con.commit()
+                   msg = "Updated Email Successfully!"
+                else:
+                   msg = "Sorry! Author id not found!"
+            except Exception as ex:
+                msg = "Sorry! Error : " + str(ex)
+            finally:
+                con.close()
+                return render(request, 'update_author.html',
+                              {'form': f, 'message': msg})
+        else:
+            return render(request, 'update_author.html',
+                          {'form': f})
 

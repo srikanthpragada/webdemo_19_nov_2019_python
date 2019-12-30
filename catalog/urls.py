@@ -9,4 +9,5 @@ urlpatterns = [
     path("discount/", views.calculate_discount),
     path("authors/", views.list_authors),
     path("addauthor/", views.add_author),
+    path("updateauthor/", views.update_author),
 ]

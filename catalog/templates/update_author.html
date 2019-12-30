@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Author</title>
+</head>
+<body>
+<h1>Update Author</h1>
+<form method="post">
+    {% csrf_token %}
+    Author Id<br/>
+    {{form.id}}
+    <p></p>
+    New Email Address<br/>
+    {{form.email}}
+    <p></p>
+    <input type="submit" value="Update" />
+    <p></p>
+    <div style="color:blue">{{message}}</div>
+</form>
+</body>
+</html>
