@@ -10,4 +10,6 @@ urlpatterns = [
     path("authors/", views.list_authors),
     path("addauthor/", views.add_author),
     path("updateauthor/", views.update_author),
+    path("ajax/", views.ajax_demo),
+    path("datetime/", views.ajax_datetime),
 ]

@@ -80,19 +80,18 @@ def add_author(request):
             cur = con.cursor()
             try:
                 cur.execute("insert into authors(fullname,email,mobile) values(?,?,?)",
-                        (name, email, mobile))
+                            (name, email, mobile))
                 con.commit()
             except Exception as ex:
                 msg = "Sorry! Error : " + str(ex)
                 return render(request, 'add_author2.html',
-                              {'form': f, 'message' : msg})
+                              {'form': f, 'message': msg})
             finally:
                 con.close()
 
             return redirect("/catalog/authors")
         else:
             return render(request, 'add_author2.html', {'form': f})
-
 
 
 def update_author(request):
@@ -110,12 +109,12 @@ def update_author(request):
             cur = con.cursor()
             try:
                 cur.execute("update authors set email = ? where id = ?",
-                        (email,id))
+                            (email, id))
                 if cur.rowcount == 1:
-                   con.commit()
-                   msg = "Updated Email Successfully!"
+                    con.commit()
+                    msg = "Updated Email Successfully!"
                 else:
-                   msg = "Sorry! Author id not found!"
+                    msg = "Sorry! Author id not found!"
             except Exception as ex:
                 msg = "Sorry! Error : " + str(ex)
             finally:
@@ -125,4 +124,11 @@ def update_author(request):
         else:
             return render(request, 'update_author.html',
                           {'form': f})
+
+
+def ajax_demo(request):
+    return render(request, 'ajax_demo.html')
+
+def ajax_datetime(request):
+    return HttpResponse(str(datetime.now()))
 
