@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import views, books_views
 
 urlpatterns = [
     path("welcome/", views.welcome),
@@ -12,4 +12,11 @@ urlpatterns = [
     path("updateauthor/", views.update_author),
     path("ajax/", views.ajax_demo),
     path("datetime/", views.ajax_datetime),
+    path("books/home", books_views.book_home),
+    path("books/list", books_views.book_list),
+    path("books/add", books_views.book_add),
+    path("books/delete/<int:id>", books_views.book_delete),
+    path("books/edit/<int:id>", books_views.book_edit),
+    path("books/search", books_views.book_search),
+    path("books/dosearch", books_views.book_do_search),
 ]

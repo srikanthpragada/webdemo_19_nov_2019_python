@@ -1,0 +1,22 @@
+{% extends "books/master.html" %}
+
+{% block body %}
+<h2>Add Book</h2>
+
+<form method="post">
+    {% csrf_token %}
+    Title <br/>
+    {{form.title}}
+    <p></p>
+    Author <br/>
+    {{form.author}}
+    <p></p>
+    Publisher<br/>
+    {{form.publisher}}
+    <p></p>
+    Price <br/>
+    {{form.price}}
+    <p></p>
+    <input id="submit_button" type="submit" value="Submit"/>
+</form>
+{% endblock %}

@@ -1,5 +1,5 @@
 import django.forms as forms
-
+from . models import Book
 
 class AuthorForm(forms.Form):
     name = forms.CharField(max_length=30)
@@ -11,3 +11,8 @@ class UpdateAuthorForm(forms.Form):
     id = forms.IntegerField()
     email = forms.EmailField()
 
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = '__all__'

@@ -1,0 +1,27 @@
+{% extends "books/master.html" %}
+
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    function getBooks() {
+       $.get("/catalog/books/dosearch?title=" + $("#title").val(),null, showBooks);
+    }
+    function showBooks(books) {
+        output = "";
+        for(i=0; i < books.length; i ++)
+             output += "<li>" + books[i].title + "</li>";
+
+        $("#books").html(output)
+    }
+
+</script>
+
+<h2>Search</h2>
+
+Title : <input type="text" id="title"/>
+<button onclick="getBooks()">Go</button>
+<ul id="books">
+
+</ul>
+
+{% endblock %}
