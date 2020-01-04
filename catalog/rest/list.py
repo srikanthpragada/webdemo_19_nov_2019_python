@@ -1,9 +1,9 @@
 import requests
 
-resp = requests.get("http://localhost:8000/catalog/rest/customers")
+resp = requests.get("http://localhost:8000/catalog/rest/books")
 if resp.status_code == 200:
-    customers = resp.json()
-    for cust in customers:
-         print(cust['id'], cust['name'], cust['email'])
+    books = resp.json()
+    for book in books:
+         print(f"{book['id']} - {book['title']} - {book['author']}")
 else:
-    print("Sorry! Could not get details of Customers!")
+    print("Sorry! Could not get details of books!")

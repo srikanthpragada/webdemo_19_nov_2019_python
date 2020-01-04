@@ -1,9 +1,9 @@
 import requests
 
-id = input("Enter customer id :")
-resp = requests.get(f"http://localhost:8000/catalog/rest/customers/{id}")
+id = input("Enter Book id :")
+resp = requests.get(f"http://localhost:8000/catalog/rest/books/{id}")
 if resp.status_code == 200:
-    cust = resp.json()
-    print(cust['name'], cust['email'])
+    book = resp.json()
+    print(f"{book['id']} - {book['title']}  - {book['author']} - {book['price']}")
 else:
-    print("Sorry! Customer not found!")
+    print("Sorry! Book not found!")

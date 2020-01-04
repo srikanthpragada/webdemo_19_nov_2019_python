@@ -1,12 +1,12 @@
 import requests
 
-id = input("Enter customer id :")
-email = input("Enter customer email :")
-resp = requests.put(f"http://localhost:8000/catalog/rest/customers/{id}",
-                    {'email': email})
+id = input("Enter book id :")
+price = input("Enter book price :")
+resp = requests.put(f"http://localhost:8000/catalog/rest/books/{id}",
+                    {'price': price})
 if resp.status_code == 200:
-    print("Customer was updated successfully!")
+    print("Book was updated successfully!")
 elif resp.status_code == 404:
-    print("Sorry! Customer not found!")
+    print("Sorry! Book not found!")
 else:
-    print("Sorry! Could not update customer due to error!")
+    print("Sorry! Could not update book due to error!")

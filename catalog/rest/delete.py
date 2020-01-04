@@ -1,8 +1,8 @@
 import requests
 
-id = input("Enter customer id :")
-resp = requests.delete(f"http://localhost:8000/catalog/rest/customers/{id}")
+id = input("Enter book id :")
+resp = requests.delete(f"http://localhost:8000/catalog/rest/books/{id}")
 if resp.status_code == 204:
-    print("Customer was deleted successfully!")
+    print("Book was deleted successfully!")
 else:
-    print("Sorry! Customer not found!")
+    print("Sorry! Book not found!")
